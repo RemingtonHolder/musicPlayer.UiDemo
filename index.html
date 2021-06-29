@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: DIN-Bold;
+            src: url(assets/fonts/d-din.bold.woff);
+        }   
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <main>
+        <div id="container">
+            <div id="darkenLayer">
+                <div id="wrapper">
+                    <div class="left">
+                        <img class="albumPhoto" src="assets/images/albumCover.jpg">
+                    </div>
+                    <div class="right">
+                        <div id="info">
+                            <h1 id="title">A Modern Tragedy Vol.1</h1>
+                            <h2 id="artist">Grandson</h2>
+                        </div>
+                        <div id="tracklist">
+                            <h3 style="margin-bottom: 2px;">Tracks:</h3>
+                            <hr style="margin-bottom: 10px; background-color: white; border: 0.5px solid white; ">
+                            <div id="tracks">
+                                <div class="track" id="track_1">
+                                    <div class="trackNum">
+                                        <h4 id="trackNumH4">1.</h4>
+                                    </div>
+                                    <div class="trackInfo">
+                                        <a onclick="play(event, this)" href="assets/audio/bloodWater.mp3"><h4 id="trackTitle">Blood // Water</h4></a>
+                                        <h5 id="trackLength">3.36</h5>
+                                    </div>
+                                </div>
+                                <div class="track" id="track_2">
+                                    <div class="trackNum">
+                                        <h4 id="trackNumH4">2.</h4>
+                                    </div>
+                                    <div class="trackInfo">
+                                        <h4 id="trackTitle">Stick Up</h4>
+                                        <h5 id="trackLength">3.43</h5>
+                                    </div>
+                                </div>
+                                <div class="track" id="track_2">
+                                    <div class="trackNum">
+                                        <h4 id="trackNumH4">3.</h4>
+                                    </div>
+                                    <div class="trackInfo">
+                                        <h4 id="trackTitle">Despicable</h4>
+                                        <h5 id="trackLength">3.44</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controls">
+                            <div class="ccurr">Blood // Water</div>
+                            <div class="ctop">
+                                <div class="skipBack" id="skip-back"><i data-feather="skip-back"></i></div>
+                                <div class="playPause" id="play" onclick="resume(event)"><i data-feather="play"></i></div>
+                                <div style="display: none;" class="playPause" id="pause" onclick="pause(event)"><i data-feather="pause"></i></div>
+                                <div class="skipForward" id="skip-forward"><i data-feather="skip-forward"></i></div>
+                            </div>
+                            <div class="cbottom">
+                                <span style="width: 7.5%;text-align: center;" id="currentTime"></span>
+                                <div id="progressBar">
+                                    <div id="pgbarInner"> 
+                                    </div>
+                                </div>
+                                <span style="width: 7.5%; text-align: center;" id="trackDuration"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </main>
+    <script>
+        // TEMP AUDIO CODE PULLED FROM HYPERBEAT //
+        var audio = document.createElement("audio");
+        var src = document.createElement("source");
+        var playb = document.getElementById("play");
+        var pauseb = document.getElementById("pause");
+        var playing = false;
+
+        function play(e, link) {
+            src.src = link.href
+            e.preventDefault();
+            audio.appendChild(src);
+            audio.load();
+            audio.play();
+            playing = true;
+            buttoncontroller()
+        }
+
+        function pause(e) {
+            audio.pause();
+            e.preventDefault();
+            playing = false;
+            buttoncontroller()
+        }
+
+        function resume(e) {
+            audio.play();
+            e.preventDefault();
+            playing = true;
+            buttoncontroller()
+        }
+
+        function buttoncontroller(e) {
+            if (playing == true) {
+                playb.style.display = "none";
+                pauseb.style.display = "block"
+            } 
+            else {
+                playb.style.display = "block";
+                pauseb.style.display = "none"
+            }
+        }
+        // display progress
+        const progressCurrent = document.getElementById("currentTime");
+        const progressDuration = document.getElementById("trackDuration");
+        const bar = document.getElementById("pgbarInner");
+        audio.addEventListener('timeupdate', function() {
+            function progressManager() {
+                bar.style.width = ((audio.currentTime / audio.duration) * 100) + "%";
+                var duration = document.getElementById('duration');
+                var s_ct = parseInt(audio.currentTime % 60);
+                var m_ct = parseInt((audio.currentTime / 60) % 60);
+                var s_pd = parseInt(audio.duration % 60);
+                var m_pd = parseInt((audio.duration / 60) % 60);
+                if (s_pd < 10) {
+                    progressDuration.innerHTML = m_pd + ':0' + s_pd ;
+                }
+                else {
+                    progressDuration.innerHTML = m_pd + ':' + s_pd;
+                }
+                if (s_ct < 10) {
+                    progressCurrent.innerHTML = m_ct + ':0' + s_ct ;
+                }
+                else {
+                    progressCurrent.innerHTML = m_ct + ':' + s_ct ;
+                }
+            }
+            progressManager()
+        });
+    </script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

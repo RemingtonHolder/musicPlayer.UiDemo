@@ -1,0 +1,180 @@
+
+body{
+    font-family: DIN-Bold;
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+a{
+    text-decoration: none !important;
+    color: white !important;
+}
+main{
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    background-image: url("assets/images/albumCover.jpg");
+    animation: displace 10s linear infinite;
+    background-repeat: repeat;
+    background-size: 500px;
+    background-attachment: fixed;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff00; 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 2px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+#darkenLayer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+#wrapper{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, calc(-50% - 40px));
+    display: flex;
+    flex-direction: row;
+}
+#container{
+    background: inherit;
+}
+#container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 10000px rgba(0, 0, 0, 0.7);
+    background: inherit;
+    filter: blur(20px);
+}
+.albumPhoto{
+    max-width: 500px;
+    max-height: 500px;
+    -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+}
+.right{
+    padding-left: 50px;
+    width: max-content;
+    max-width: 500px;
+    max-height: 500px;
+    width: 500px;
+}
+#title{
+    font-size: 2.5em;
+    margin-bottom: 0px;
+}
+#artist{
+    color: rgba(255, 255, 255, 0.70);
+    margin-top: 0px;
+}
+#tracks{
+    max-height: 175px;
+    overflow-y: scroll;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.track{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid white;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.trackNum{
+    width: 5%;
+    padding-right: 3px;
+}
+.trackInfo{
+    width: calc(95% - 3px);
+}
+#trackTitle{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+#trackLength{
+    color: rgba(255, 255, 255, 0.70);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+#controls{
+    color: black;
+    width: 100%;
+    height: fit-content;
+    border-radius: 3px;
+    background-color: white;
+}
+.ccurr{
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    width: 75%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.ctop{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.skipBack svg, .skipForward svg{
+    width: 20px;
+}
+.playPause{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.cbottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15px;
+}
+#progressBar{
+    height: 5px;
+    width: 70%;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid black;
+    transform: translateY(1px);
+    border-radius: 3px;
+    overflow: hidden;
+}
+#pgbarInner{
+    height: 5px;
+    width: 0%;
+    background-color: black;
+    transition: width 1s linear;
+}
+
+
+
+
+
+
+
+@keyframes displace {
+    from { background-position: left center;
+    } to { background-position: 500px center; }
+}
